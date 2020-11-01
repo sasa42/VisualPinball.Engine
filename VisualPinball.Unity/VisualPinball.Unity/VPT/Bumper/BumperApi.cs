@@ -17,10 +17,11 @@
 using System;
 using Unity.Entities;
 using VisualPinball.Engine.VPT.Bumper;
+using VisualPinball.Engine.VPT.Table;
 
 namespace VisualPinball.Unity
 {
-	public class BumperApi : ItemApi<Bumper, BumperData>, IApiInitializable, IApiHittable, IApiSwitch, IApiCoil
+	public class BumperApi : ItemApi<Bumper, BumperData>, IApiInitializable, IApiHittable, IApiCollider, IApiSwitch, IApiCoil
 	{
 
 		/// <summary>
@@ -35,6 +36,13 @@ namespace VisualPinball.Unity
 
 		public BumperApi(Bumper item, Entity entity, Player player) : base(item, entity, player)
 		{
+		}
+
+		Collider[] IApiCollider.GetHittables(Table table)
+		{
+			return new Collider[] {
+
+			};
 		}
 
 		void IApiSwitch.AddSwitchId(string switchId, int pulseDelay) => AddSwitchId(switchId, Item.IsPulseSwitch, pulseDelay);

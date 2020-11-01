@@ -60,6 +60,7 @@ namespace VisualPinball.Unity
 		// table related
 		private readonly TableApi _tableApi = new TableApi();
 		private readonly List<IApiInitializable> _initializables = new List<IApiInitializable>();
+		private readonly List<IApiCollider> _colliders = new List<IApiCollider>();
 		private readonly Dictionary<Entity, IApiHittable> _hittables = new Dictionary<Entity, IApiHittable>();
 		private readonly Dictionary<Entity, IApiRotatable> _rotatables = new Dictionary<Entity, IApiRotatable>();
 		private readonly Dictionary<Entity, IApiCollidable> _collidables = new Dictionary<Entity, IApiCollidable>();
@@ -69,6 +70,8 @@ namespace VisualPinball.Unity
 		private readonly Dictionary<string, IApiCoil> _coils = new Dictionary<string, IApiCoil>();
 
 		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+		internal IEnumerable<IApiCollider> Collidables => _colliders;
 
 		// input related
 		private InputManager _inputManager;
@@ -148,6 +151,7 @@ namespace VisualPinball.Unity
 			var bumperApi = new BumperApi(bumper, entity, this);
 			_tableApi.Bumpers[bumper.Name] = bumperApi;
 			_initializables.Add(bumperApi);
+			_colliders.Add(bumperApi);
 			_hittables[entity] = bumperApi;
 			_switches[bumper.Name] = bumperApi;
 			_coils[bumper.Name] = bumperApi;

@@ -20,6 +20,7 @@ using Unity.Mathematics;
 using VisualPinball.Engine.Common;
 using VisualPinball.Engine.Physics;
 using VisualPinball.Engine.VPT;
+using VisualPinball.Engine.VPT.Bumper;
 
 namespace VisualPinball.Unity
 {
@@ -35,6 +36,13 @@ namespace VisualPinball.Unity
 
 		public ColliderType Type => _header.Type;
 		public Entity Entity => _header.Entity;
+
+		// public static void Create(BlobBuilder builder, BumperData bumperData, ref BlobPtr<Collider> dest, ColliderType type = ColliderType.Circle)
+		// {
+		// 	ref var ptr = ref UnsafeUtility.As<BlobPtr<Collider>, BlobPtr<CircleCollider>>(ref dest);
+		// 	ref var collider = ref builder.Allocate(ref ptr);
+		// 	collider.Init(bumperData, type);
+		// }
 
 		public static void Create(BlobBuilder builder, HitCircle src, ref BlobPtr<Collider> dest, ColliderType type = ColliderType.Circle)
 		{

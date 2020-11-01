@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
+using VisualPinball.Engine.VPT.Table;
+
 namespace VisualPinball.Unity
 {
 	public interface IApi
@@ -26,7 +28,12 @@ namespace VisualPinball.Unity
 		void OnInit(BallManager ballManager);
 	}
 
-	internal interface IApiHittable
+	internal interface IApiCollider
+	{
+		Collider[] GetHittables(Table table);
+	}
+
+	public interface IApiHittable
 	{
 		void OnHit(bool isUnHit = false);
 	}

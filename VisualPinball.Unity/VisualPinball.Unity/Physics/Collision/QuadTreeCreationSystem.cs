@@ -21,6 +21,7 @@ using NLog;
 using Unity.Entities;
 using UnityEngine;
 using VisualPinball.Engine.Physics;
+using Debug = UnityEngine.Debug;
 using Logger = NLog.Logger;
 
 namespace VisualPinball.Unity
@@ -30,6 +31,16 @@ namespace VisualPinball.Unity
 		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 		public static void Create(EntityManager entityManager)
+		{
+			var player = Object.FindObjectOfType<Player>();
+
+			Debug.Log($"Found {player.Collidables.Count()} collidables.");
+
+
+			Logger.Info("Static QuadTree initialized.");
+		}
+
+		public static void CreateLegacy(EntityManager entityManager)
 		{
 			var table = Object.FindObjectOfType<TableAuthoring>().Table;
 			var stopWatch = new Stopwatch();
@@ -84,8 +95,6 @@ namespace VisualPinball.Unity
 			//DstEntityManager.SetName(collEntity, "Collision Data Holder");
 			entityManager.SetComponentData(collEntity, new QuadTreeData { Value = quadTreeBlobAssetRef });
 			entityManager.SetComponentData(collEntity, new ColliderData { Value = colliderBlob });
-
-			Logger.Info("Static QuadTree initialized.");
 		}
 	}
 }
