@@ -25,7 +25,7 @@ namespace VisualPinball.Engine.VPT.Rubber
 {
 	public class RubberMeshGenerator : MeshGenerator
 	{
-		public readonly Vertex3D MiddlePoint = new Vertex3D();
+		public Vertex3D MiddlePoint;
 		private readonly RubberData _data;
 
 		protected override Vertex3D Position => new Vertex3D(MiddlePoint.X, MiddlePoint.Y, MiddlePoint.Z);
