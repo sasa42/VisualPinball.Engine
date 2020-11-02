@@ -20,7 +20,6 @@ using Unity.Mathematics;
 using VisualPinball.Engine.Common;
 using VisualPinball.Engine.Physics;
 using VisualPinball.Engine.VPT;
-using VisualPinball.Engine.VPT.Bumper;
 
 namespace VisualPinball.Unity
 {
@@ -34,22 +33,21 @@ namespace VisualPinball.Unity
 		private float _zHigh;
 		private float _zLow;
 
-		public ColliderType Type => _header.Type;
-		public Entity Entity => _header.Entity;
-
-		// public static void Create(BlobBuilder builder, BumperData bumperData, ref BlobPtr<Collider> dest, ColliderType type = ColliderType.Circle)
-		// {
-		// 	ref var ptr = ref UnsafeUtility.As<BlobPtr<Collider>, BlobPtr<CircleCollider>>(ref dest);
-		// 	ref var collider = ref builder.Allocate(ref ptr);
-		// 	collider.Init(bumperData, type);
-		// }
-
 		public static void Create(BlobBuilder builder, HitCircle src, ref BlobPtr<Collider> dest, ColliderType type = ColliderType.Circle)
 		{
 			ref var ptr = ref UnsafeUtility.As<BlobPtr<Collider>, BlobPtr<CircleCollider>>(ref dest);
 			ref var collider = ref builder.Allocate(ref ptr);
 			collider.Init(src, type);
 		}
+
+		public static void Create(float2 center, float radius, float zLow, float zHigh, ColliderInfo info,
+			BlobBuilder builder, ref BlobPtr<Collider> dest, ColliderType type = ColliderType.Circle)
+		{
+			ref var ptr = ref UnsafeUtility.As<BlobPtr<Collider>, BlobPtr<CircleCollider>>(ref dest);
+			ref var collider = ref builder.Allocate(ref ptr);
+			collider.Init(center, radius, zLow, zHigh, info, type);
+		}
+
 
 		public static CircleCollider Create(HitCircle src, ColliderType type = ColliderType.Circle)
 		{
@@ -67,6 +65,17 @@ namespace VisualPinball.Unity
 
 			_zHigh = src.HitBBox.ZHigh;
 			_zLow = src.HitBBox.ZLow;
+		}
+
+		private void Init(float2 center, float radius, float zLow, float zHigh, ColliderInfo info, ColliderType type)
+		{
+			_header.Init(info);
+
+			Center = center;
+			Radius = radius;
+
+			_zHigh = zHigh;
+			_zLow = zLow;
 		}
 
 		#region Narrowphase

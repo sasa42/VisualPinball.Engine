@@ -16,6 +16,7 @@
 
 using System.Collections.Generic;
 using Unity.Entities;
+using Unity.Transforms;
 using VisualPinball.Engine.VPT;
 using VisualPinball.Engine.VPT.Table;
 
@@ -27,6 +28,7 @@ namespace VisualPinball.Unity
 
 		protected readonly T Item;
 		internal readonly Entity Entity;
+		internal readonly Entity ParentEntity;
 
 		protected TData Data => Item.Data;
 		protected Table Table => _player.Table;
@@ -37,12 +39,27 @@ namespace VisualPinball.Unity
 
 		private readonly Player _player;
 
-		protected ItemApi(T item, Entity entity, Player player)
+		protected ItemApi(T item, Entity entity, Entity parentEntity, Player player)
 		{
 			Item = item;
 			Entity = entity;
+			ParentEntity = parentEntity;
 			_player = player;
 			_gamelogicEngineWithSwitches = (IGamelogicEngineWithSwitches)player.GameEngine;
+		}
+
+		internal ColliderInfo GetColliderInfo(int id, ItemType itemType, ColliderType colliderType) {
+			return new ColliderInfo {
+				Id = id,
+				Type = colliderType,
+				ItemType = itemType,
+				Entity = Entity,
+				ParentEntity = ParentEntity,
+				FireEvents = true,
+				IsEnabled = true,
+				Material = default,
+				Threshold = 0,
+			};
 		}
 
 		#region IApiSwitchable

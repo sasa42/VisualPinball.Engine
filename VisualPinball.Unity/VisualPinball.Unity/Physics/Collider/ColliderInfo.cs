@@ -14,29 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-using System;
 using Unity.Entities;
+using VisualPinball.Engine.VPT;
 
 namespace VisualPinball.Unity
 {
-	public class RampApi : ItemApi<Engine.VPT.Ramp.Ramp, Engine.VPT.Ramp.RampData>, IApiInitializable
+	internal struct ColliderInfo
 	{
-		/// <summary>
-		/// Event emitted when the table is started.
-		/// </summary>
-		public event EventHandler Init;
-
-		internal RampApi(Engine.VPT.Ramp.Ramp item, Entity entity, Entity parentEntity, Player player) : base(item, entity, parentEntity, player)
-		{
-		}
-
-		#region Events
-
-		void IApiInitializable.OnInit(BallManager ballManager)
-		{
-			Init?.Invoke(this, EventArgs.Empty);
-		}
-
-		#endregion
+		public int Id;
+		public ItemType ItemType;
+		public ColliderType Type;
+		public Entity Entity;
+		public Entity ParentEntity;
+		public PhysicsMaterialData Material;
+		public float Threshold;
+		public bool FireEvents;
+		public bool IsEnabled;
 	}
 }

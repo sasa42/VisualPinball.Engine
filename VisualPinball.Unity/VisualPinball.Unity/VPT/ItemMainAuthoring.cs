@@ -82,6 +82,19 @@ namespace VisualPinball.Unity
 				.Select(c => (IItemColliderAuthoring) c)
 				.Where(ca => ca.ItemData == _data) : new IItemColliderAuthoring[0];
 
+		protected Entity ParentEntity {
+			get {
+				var parentAuthoring = ParentAuthoring;
+				if (parentAuthoring != null && !(parentAuthoring is TableAuthoring)) {
+					return new Entity {
+						Index = parentAuthoring.IItem.Index,
+						Version = parentAuthoring.IItem.Version,
+					};
+				}
+				return Entity.Null;
+			}
+		}
+
 		public IItemMainAuthoring ParentAuthoring => FindParentAuthoring();
 
 		public bool IsCorrectlyParented {

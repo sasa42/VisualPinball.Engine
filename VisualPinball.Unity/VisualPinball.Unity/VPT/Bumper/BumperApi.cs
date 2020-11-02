@@ -16,6 +16,7 @@
 
 using System;
 using Unity.Entities;
+using VisualPinball.Engine.VPT;
 using VisualPinball.Engine.VPT.Bumper;
 using VisualPinball.Engine.VPT.Table;
 
@@ -34,15 +35,19 @@ namespace VisualPinball.Unity
 		/// </summary>
 		public event EventHandler Hit;
 
-		public BumperApi(Bumper item, Entity entity, Player player) : base(item, entity, player)
+		public BumperApi(Bumper item, Entity entity, Entity parentEntity, Player player) : base(item, entity, parentEntity, player)
 		{
 		}
 
-		Collider[] IApiCollider.GetHittables(Table table)
-		{
-			return new Collider[] {
+		int IApiCollider.ColliderCount { get; } = 1;
 
-			};
+		void IApiCollider.CreateColliders(Table table, BlobBuilder builder, ref BlobBuilderArray<BlobPtr<Collider>> colliders, ref int nextColliderId)
+		{
+			var height = table.GetSurfaceHeight(Data.Surface, Data.Center.X, Data.Center.Y);
+			var colliderId = nextColliderId++;
+
+			CircleCollider.Create(Data.Center.ToUnityFloat2(), Data.Radius, height, height + Data.HeightScale,
+				GetColliderInfo(colliderId, ItemType.Bumper, ColliderType.Bumper), builder, ref colliders[colliderId]);
 		}
 
 		void IApiSwitch.AddSwitchId(string switchId, int pulseDelay) => AddSwitchId(switchId, Item.IsPulseSwitch, pulseDelay);

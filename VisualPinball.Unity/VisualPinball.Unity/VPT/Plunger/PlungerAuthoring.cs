@@ -44,7 +44,7 @@ namespace VisualPinball.Unity
 		{
 			Convert(entity, dstManager);
 			var table = gameObject.GetComponentInParent<TableAuthoring>().Item;
-			transform.GetComponentInParent<Player>().RegisterPlunger(Item, entity, gameObject);
+			transform.GetComponentInParent<Player>().RegisterPlunger(Item, entity, ParentEntity, gameObject);
 
 			Item.Init(table);
 			var hit = Item.PlungerHit;

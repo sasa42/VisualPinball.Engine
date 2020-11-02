@@ -42,7 +42,7 @@ namespace VisualPinball.Unity
 
 		public bool DoRetract { get; set; } = true;
 
-		internal PlungerApi(Plunger item, Entity entity, Player player) : base(item, entity, player)
+		internal PlungerApi(Plunger item, Entity entity, Entity parentEntity, Player player) : base(item, entity, parentEntity, player)
 		{
 		}
 

@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using NLog;
+using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
 using VisualPinball.Engine.Physics;
@@ -34,7 +35,40 @@ namespace VisualPinball.Unity
 		{
 			var player = Object.FindObjectOfType<Player>();
 
-			Debug.Log($"Found {player.Collidables.Count()} collidables.");
+			var itemApis = player.Collidables.ToArray();
+			Debug.Log($"Found {itemApis.Length} collidables.");
+
+			// 1. Create collider blob (BlobAssetReference<ColliderBlob>) and AABBs
+			// 1a. setup blob builder
+			BlobAssetReference<ColliderBlob> colliderBlob;
+			using (var builder = new BlobBuilder(Allocator.TempJob)) {
+				ref var root = ref builder.ConstructRoot<ColliderBlob>();
+
+				var colliderCount = 0;
+				foreach (var itemApi in itemApis) {
+					colliderCount += itemApi.ColliderCount;
+				}
+
+				var colliders = builder.Allocate(ref root.Colliders, colliderCount);
+				var colliderId = 0;
+
+				// 1b. for every IApiCollider:
+				foreach (var itemApi in itemApis) {
+
+					// - add colliders to the blob (creates id, assigns entity and parent entity)
+					// - add AABB to the list (and assigns id)
+					itemApi.CreateColliders(player.Table, builder, ref colliders, ref colliderId);
+				}
+
+				// todo
+				// root.PlayfieldColliderId = playfieldColliderId;
+				// root.GlassColliderId = glassColliderId;
+
+				colliderBlob = builder.CreateBlobAssetReference<ColliderBlob>(Allocator.Persistent);
+			}
+
+			// 2. Create quadtree blob (BlobAssetReference<QuadTreeBlob>) from AABBs
+
 
 
 			Logger.Info("Static QuadTree initialized.");
@@ -46,11 +80,13 @@ namespace VisualPinball.Unity
 			var stopWatch = new Stopwatch();
 
 			stopWatch.Start();
+
+			// 1. init playables - this already creates colliders for some items
 			foreach (var playable in table.Playables) {
 				playable.Init(table);
 			}
 
-			// index hittables
+			// 2. now collect all hit objects, resulting in creation of the remaining colliders. this also sets the IDs
 			var hittables = table.Hittables.Where(hittable => hittable.IsCollidable).ToArray();
 			var hitObjects = new List<HitObject>();
 			var id = 0;
@@ -71,8 +107,10 @@ namespace VisualPinball.Unity
 			stopWatch.Stop();
 			Logger.Info("Collider Count:\n" + log + "\nTotal: " + c + " colliders in " + stopWatch.ElapsedMilliseconds + "ms");
 
-			// construct quad tree
+			// 3. create the "ported" (class) quadtree
 			var quadTree = new Engine.Physics.QuadTree(hitObjects, table.BoundingBox);
+
+			// 4. convert the "ported" (class) quadtree to "runtime" struct quadtree
 			var quadTreeBlobAssetRef = QuadTreeBlob.CreateBlobAssetReference(
 				quadTree,
 				table.GeneratePlayfieldHit(), // todo use `null` if separate playfield mesh exists
@@ -87,7 +125,7 @@ namespace VisualPinball.Unity
 			hitObjects.Add(playfieldHitObject);
 			hitObjects.Add(glassHitObject);
 
-			// construct collider blob
+			// 5. construct collider blob out of hit objects - this converts hit objects to structs
 			var colliderBlob = ColliderBlob.CreateBlobAssetReference(hitObjects, playfieldHitObject.Id, glassHitObject.Id);
 
 			// save it to entity
