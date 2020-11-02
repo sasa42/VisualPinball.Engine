@@ -16,6 +16,7 @@
 
 using System.Collections.Generic;
 using Unity.Entities;
+using VisualPinball.Engine.VPT;
 using VisualPinball.Engine.VPT.Table;
 
 namespace VisualPinball.Unity
@@ -32,6 +33,12 @@ namespace VisualPinball.Unity
 
 	internal interface IApiCollider
 	{
+		ItemType ItemType { get; }
+		bool FireEvents { get; }
+		bool IsColliderEnabled { get; }
+		PhysicsMaterialData PhysicsMaterial { get; }
+		float Threshold { get; }
+
 		int ColliderCount { get; }
 		void CreateColliders(Table table, BlobBuilder builder, ref BlobBuilderArray<BlobPtr<Collider>> colliders, ref int nextColliderId);
 	}

@@ -48,17 +48,21 @@ namespace VisualPinball.Unity
 			_gamelogicEngineWithSwitches = (IGamelogicEngineWithSwitches)player.GameEngine;
 		}
 
-		internal ColliderInfo GetColliderInfo(int id, ItemType itemType, ColliderType colliderType) {
+		internal ColliderInfo GetColliderInfo(int id, ColliderType colliderType)
+		{
+			if (!(this is IApiCollider c)) {
+				return default;
+			}
 			return new ColliderInfo {
 				Id = id,
 				Type = colliderType,
-				ItemType = itemType,
+				ItemType = c.ItemType,
 				Entity = Entity,
 				ParentEntity = ParentEntity,
-				FireEvents = true,
-				IsEnabled = true,
-				Material = default,
-				Threshold = 0,
+				FireEvents = c.FireEvents,
+				IsEnabled = c.IsColliderEnabled,
+				Material = c.PhysicsMaterial,
+				Threshold = c.Threshold,
 			};
 		}
 

@@ -24,7 +24,6 @@ namespace VisualPinball.Unity
 {
 	public class BumperApi : ItemApi<Bumper, BumperData>, IApiInitializable, IApiHittable, IApiCollider, IApiSwitch, IApiCoil
 	{
-
 		/// <summary>
 		/// Event emitted when the table is started.
 		/// </summary>
@@ -39,6 +38,20 @@ namespace VisualPinball.Unity
 		{
 		}
 
+		void IApiSwitch.AddSwitchId(string switchId, int pulseDelay) => AddSwitchId(switchId, Item.IsPulseSwitch, pulseDelay);
+
+		void IApiCoil.OnCoil(bool enabled, bool _)
+		{
+			// bumper coils are currently triggered automatically on hit
+		}
+
+		#region Collision
+
+		ItemType IApiCollider.ItemType { get; } = ItemType.Bumper;
+		bool IApiCollider.FireEvents => Data.HitEvent;
+		bool IApiCollider.IsColliderEnabled => Data.IsCollidable;
+		PhysicsMaterialData IApiCollider.PhysicsMaterial { get; } = default;
+		float IApiCollider.Threshold => Data.Threshold;
 		int IApiCollider.ColliderCount { get; } = 1;
 
 		void IApiCollider.CreateColliders(Table table, BlobBuilder builder, ref BlobBuilderArray<BlobPtr<Collider>> colliders, ref int nextColliderId)
@@ -47,15 +60,10 @@ namespace VisualPinball.Unity
 			var colliderId = nextColliderId++;
 
 			CircleCollider.Create(Data.Center.ToUnityFloat2(), Data.Radius, height, height + Data.HeightScale,
-				GetColliderInfo(colliderId, ItemType.Bumper, ColliderType.Bumper), builder, ref colliders[colliderId]);
+				GetColliderInfo(colliderId, ColliderType.Bumper), builder, ref colliders[colliderId]);
 		}
 
-		void IApiSwitch.AddSwitchId(string switchId, int pulseDelay) => AddSwitchId(switchId, Item.IsPulseSwitch, pulseDelay);
-
-		void IApiCoil.OnCoil(bool enabled, bool _)
-		{
-			// bumper coils are currently triggered automatically on hit
-		}
+		#endregion
 
 		#region Events
 
