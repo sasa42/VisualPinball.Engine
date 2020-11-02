@@ -33,6 +33,15 @@ namespace VisualPinball.Unity
 		private float _zHigh;
 		private float _zLow;
 
+		public Aabb Aabb => new Aabb {
+			Left = Center.x - Radius,
+			Right = Center.x + Radius,
+			Top = Center.y - Radius,
+			Bottom = Center.y + Radius,
+			ZLow = _zLow,
+			ZHigh = _zHigh
+		};
+
 		public static void Create(BlobBuilder builder, HitCircle src, ref BlobPtr<Collider> dest, ColliderType type = ColliderType.Circle)
 		{
 			ref var ptr = ref UnsafeUtility.As<BlobPtr<Collider>, BlobPtr<CircleCollider>>(ref dest);
