@@ -39,7 +39,9 @@ namespace VisualPinball.Unity
 			Top = Center.y - Radius,
 			Bottom = Center.y + Radius,
 			ZLow = _zLow,
-			ZHigh = _zHigh
+			ZHigh = _zHigh,
+			ColliderEntity = _header.Entity,
+			ColliderId = _header.Id
 		};
 
 		public static void Create(BlobBuilder builder, HitCircle src, ref BlobPtr<Collider> dest, ColliderType type = ColliderType.Circle)
@@ -49,12 +51,13 @@ namespace VisualPinball.Unity
 			collider.Init(src, type);
 		}
 
-		public static void Create(float2 center, float radius, float zLow, float zHigh, ColliderInfo info,
-			BlobBuilder builder, ref BlobPtr<Collider> dest, ColliderType type = ColliderType.Circle)
+		public static void Create(BlobBuilder builder, float2 center, float radius, float zLow, float zHigh,
+			ColliderInfo info,
+			ref BlobPtr<Collider> dest)
 		{
 			ref var ptr = ref UnsafeUtility.As<BlobPtr<Collider>, BlobPtr<CircleCollider>>(ref dest);
 			ref var collider = ref builder.Allocate(ref ptr);
-			collider.Init(center, radius, zLow, zHigh, info, type);
+			collider.Init(center, radius, zLow, zHigh, info);
 		}
 
 
@@ -76,7 +79,7 @@ namespace VisualPinball.Unity
 			_zLow = src.HitBBox.ZLow;
 		}
 
-		private void Init(float2 center, float radius, float zLow, float zHigh, ColliderInfo info, ColliderType type)
+		private void Init(float2 center, float radius, float zLow, float zHigh, ColliderInfo info)
 		{
 			_header.Init(info);
 

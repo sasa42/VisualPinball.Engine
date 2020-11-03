@@ -92,9 +92,10 @@ namespace VisualPinball.Unity
 			var tableComponent = gameObject.GetComponent<TableAuthoring>();
 			var engineComponent = GetComponent<IGameEngineAuthoring>();
 
-			Table = tableComponent.CreateTable(tableComponent.Data);
+			Table = tableComponent.Table; //tableComponent.CreateTable(tableComponent.Data);
 			BallManager = new BallManager(Table, TableToWorld);
 			_inputManager = new InputManager();
+			_colliders.Add(_tableApi);
 
 			if (engineComponent != null) {
 				GameEngine = engineComponent.GameEngine;
@@ -379,7 +380,6 @@ namespace VisualPinball.Unity
 				Logger.Warn($"Should {what} unassigned coil {coilEvent.Id}.");
 			}
 		}
-
 
 		#endregion
 
