@@ -17,19 +17,41 @@
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Entities;
 using Unity.Mathematics;
+using UnityEngine;
 using VisualPinball.Engine.Common;
 using VisualPinball.Engine.Physics;
+using Random = Unity.Mathematics.Random;
 
 namespace VisualPinball.Unity
 {
-	internal struct PlaneCollider
+	internal struct PlaneCollider : ICollider
 	{
+		public int Id => _header.Id;
+
 		private ColliderHeader _header;
 
 		private float3 _normal;
 		private float _distance;
 
 		public ColliderType Type => _header.Type;
+
+		public PlaneCollider(float3 normal, float distance, ColliderInfo info) : this()
+		{
+			_header.Init(info);
+			_normal = normal;
+			_distance = distance;
+		}
+
+		public unsafe void Allocate(BlobBuilder builder, ref BlobBuilderArray<BlobPtr<Collider>> colliders)
+		{
+			ref var ptr = ref UnsafeUtility.As<BlobPtr<Collider>, BlobPtr<PlaneCollider>>(ref colliders[_header.Id]);
+			ref var collider = ref builder.Allocate(ref ptr);
+			UnsafeUtility.MemCpy(
+				UnsafeUtility.AddressOf(ref collider),
+				UnsafeUtility.AddressOf(ref this),
+				sizeof(PlaneCollider)
+			);
+		}
 
 		public static void Create(BlobBuilder builder, HitPlane src, ref BlobPtr<Collider> dest)
 		{

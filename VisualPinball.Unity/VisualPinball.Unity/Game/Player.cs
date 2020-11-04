@@ -44,6 +44,7 @@ namespace VisualPinball.Unity
 	public class Player : MonoBehaviour
 	{
 		public Table Table { get; private set; }
+		public TableApi TableApi => _tableApi;
 
 		// shortcuts
 		public Matrix4x4 TableToWorld => transform.localToWorldMatrix;
@@ -95,7 +96,6 @@ namespace VisualPinball.Unity
 			Table = tableComponent.Table; //tableComponent.CreateTable(tableComponent.Data);
 			BallManager = new BallManager(Table, TableToWorld);
 			_inputManager = new InputManager();
-			_colliders.Add(_tableApi);
 
 			if (engineComponent != null) {
 				GameEngine = engineComponent.GameEngine;
