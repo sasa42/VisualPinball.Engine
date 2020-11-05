@@ -143,7 +143,6 @@ namespace VisualPinball.Unity
 		internal (PlaneCollider, PlaneCollider) CreateColliders(Table table, ref int nextColliderId)
 		{
 			var info = new ColliderInfo {
-				Type = ColliderType.Plane,
 				ItemType = ItemType.Table,
 				Entity = new Entity { Index = table.Index, Version = table.Version },
 				FireEvents = false,
@@ -152,9 +151,9 @@ namespace VisualPinball.Unity
 					Elasticity = table.Data.Elasticity,
 					ElasticityFalloff = table.Data.ElasticityFalloff,
 					Friction = table.Data.Friction,
-					Scatter = table.Data.Scatter
+					ScatterAngleRad = table.Data.Scatter
 				},
-				Threshold = 0
+				HitThreshold = 0
 			};
 
 			var playfieldColliderId = nextColliderId++;

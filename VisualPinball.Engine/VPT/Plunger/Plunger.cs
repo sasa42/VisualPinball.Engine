@@ -25,6 +25,7 @@ namespace VisualPinball.Engine.VPT.Plunger
 	{
 		public override string ItemName { get; } = "Plunger";
 		public override string ItemGroupName { get; } = "Plungers";
+		public override ItemType ItemType { get; } = ItemType.Plunger;
 
 		public Vertex3D Position { get => new Vertex3D(Data.Center.X, Data.Center.Y, 0); set => Data.Center = new Vertex2D(value.X, value.Y); }
 		public float RotationY { get => 0; set { } }

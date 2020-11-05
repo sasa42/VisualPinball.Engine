@@ -16,17 +16,17 @@
 
 using System.Collections.Generic;
 using Unity.Entities;
-using Unity.Transforms;
+using Unity.Mathematics;
 using VisualPinball.Engine.VPT;
 using VisualPinball.Engine.VPT.Table;
 
 namespace VisualPinball.Unity
 {
-	public abstract class ItemApi<T, TData> : IApi where T : Item<TData> where TData : ItemData
+	public abstract class ItemApi<TItem, TData> : IApi where TItem : Item<TData> where TData : ItemData
 	{
 		public string Name => Item.Name;
 
-		protected readonly T Item;
+		public readonly TItem Item;
 		internal readonly Entity Entity;
 		internal readonly Entity ParentEntity;
 
@@ -34,12 +34,11 @@ namespace VisualPinball.Unity
 		protected Table Table => _player.Table;
 
 		protected readonly EntityManager EntityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-
 		internal VisualPinballSimulationSystemGroup SimulationSystemGroup => World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<VisualPinballSimulationSystemGroup>();
 
 		private readonly Player _player;
 
-		protected ItemApi(T item, Entity entity, Entity parentEntity, Player player)
+		protected ItemApi(TItem item, Entity entity, Entity parentEntity, Player player)
 		{
 			Item = item;
 			Entity = entity;
@@ -48,23 +47,73 @@ namespace VisualPinball.Unity
 			_gamelogicEngineWithSwitches = (IGamelogicEngineWithSwitches)player.GameEngine;
 		}
 
-		internal ColliderInfo GetColliderInfo(Table table, int id, ColliderType colliderType)
+		#region Collider
+
+		internal virtual bool IsColliderEnabled  => Data is IPhysicalData physicalData && physicalData.GetIsCollidable();
+		internal virtual bool FireHitEvents { get; } = false;
+		internal virtual float HitThreshold { get; } = 0;
+		internal virtual PhysicsMaterialData GetPhysicsMaterial(Table table)
 		{
-			if (!(this is IColliderGenerator c)) {
-				return default;
+			if (Data is IPhysicalData physicalData) {
+				var mat = table.GetMaterial(physicalData.GetPhysicsMaterial());
+				var matData = new PhysicsMaterialData();
+				if (mat != null && !physicalData.GetOverwritePhysics()) {
+					matData.Elasticity = mat.Elasticity;
+					matData.ElasticityFalloff = mat.ElasticityFalloff;
+					matData.Friction = mat.Friction;
+					matData.ScatterAngleRad = math.radians(mat.ScatterAngle);
+
+				} else {
+					matData.Elasticity = physicalData.GetElasticity();
+					matData.ElasticityFalloff = physicalData.GetElasticityFalloff();
+					matData.Friction = physicalData.GetFriction();
+					matData.ScatterAngleRad = math.radians(physicalData.GetScatter());
+				}
+				return matData;
 			}
+			return default;
+		}
+
+		/// <summary>
+		/// Returns returns collider info passed when creating the collider.
+		///
+		/// Use this for colliders that are part of the quad tree.
+		/// </summary>
+		/// <param name="table"></param>
+		/// <param name="nextColliderId">Reference to collider index</param>
+		internal ColliderInfo GetNextColliderInfo(Table table, ref int nextColliderId)
+		{
+			var id = nextColliderId++;
+			return GetColliderInfo(table, id);
+		}
+
+		/// <summary>
+		/// Returns collider info.
+		///
+		/// Use this for colliders that are part of another collider and are
+		/// not in the quad tree.
+		/// </summary>
+		/// <param name="table"></param>
+		internal ColliderInfo GetColliderInfo(Table table)
+		{
+			return GetColliderInfo(table, -1);
+		}
+
+		private ColliderInfo GetColliderInfo(Table table, int id)
+		{
 			return new ColliderInfo {
 				Id = id,
-				Type = colliderType,
-				ItemType = c.ItemType,
+				ItemType = Item.ItemType,
 				Entity = Entity,
 				ParentEntity = ParentEntity,
-				FireEvents = c.FireEvents,
-				IsEnabled = c.IsColliderEnabled,
-				Material = c.PhysicsMaterial(table),
-				Threshold = c.Threshold,
+				FireEvents = FireHitEvents,
+				IsEnabled = IsColliderEnabled,
+				Material = GetPhysicsMaterial(table),
+				HitThreshold = HitThreshold,
 			};
 		}
+
+		#endregion
 
 		#region IApiSwitchable
 

@@ -35,6 +35,12 @@ namespace VisualPinball.Unity
 		private float _zHigh;
 		private float _length;
 
+		private ItemType ItemType => _header.ItemType;
+		private Entity Entity => _header.Entity;
+
+		public float V1y { set => _v1.y = value; }
+		public float V2y { set => _v2.y = value; }
+
 		public Aabb Aabb => new Aabb {
 			Left = math.min(_v1.x, _v2.x),
 			Right = math.max(_v1.x, _v2.x),
@@ -46,15 +52,9 @@ namespace VisualPinball.Unity
 			ColliderEntity = _header.Entity
 		};
 
-		private ItemType ItemType => _header.ItemType;
-		private Entity Entity => _header.Entity;
-
-		public float V1y { set => _v1.y = value; }
-		public float V2y { set => _v2.y = value; }
-
 		public LineCollider(float2 v1, float2 v2, float zLow, float zHigh, ColliderInfo info) : this()
 		{
-			_header.Init(info);
+			_header.Init(info, ColliderType.Line);
 			_v1 = v1;
 			_v2 = v2;
 			_zLow = zLow;
@@ -62,15 +62,15 @@ namespace VisualPinball.Unity
 			CalcNormal();
 		}
 
-		public LineCollider(float2 v1, float2 v2, float zLow, float zHigh, ItemType itemType) : this()
-		{
-			_header.Init(ColliderType.Line, itemType);
-			_v1 = v1;
-			_v2 = v2;
-			_zLow = zLow;
-			_zHigh = zHigh;
-			CalcNormal();
-		}
+		// public LineCollider(float2 v1, float2 v2, float zLow, float zHigh, ItemType itemType) : this()
+		// {
+		// 	_header.Init(ColliderType.Line, itemType);
+		// 	_v1 = v1;
+		// 	_v2 = v2;
+		// 	_zLow = zLow;
+		// 	_zHigh = zHigh;
+		// 	CalcNormal();
+		// }
 
 		public unsafe void Allocate(BlobBuilder builder, ref BlobBuilderArray<BlobPtr<Collider>> colliders)
 		{

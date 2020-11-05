@@ -194,6 +194,7 @@ namespace VisualPinball.Unity
 			var hitTargetApi = new HitTargetApi(hitTarget, entity, parentEntity, this);
 			_tableApi.HitTargets[hitTarget.Name] = hitTargetApi;
 			_initializables.Add(hitTargetApi);
+			_colliderGenerators.Add(hitTargetApi);
 			_hittables[entity] = hitTargetApi;
 			_switches[hitTarget.Name] = hitTargetApi;
 		}

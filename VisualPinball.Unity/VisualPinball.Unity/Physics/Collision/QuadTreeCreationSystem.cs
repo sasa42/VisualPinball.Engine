@@ -45,7 +45,7 @@ namespace VisualPinball.Unity
 			BlobAssetReference<ColliderBlob> colliderBlobAssetRef;
 			using (var builder = new BlobBuilder(Allocator.TempJob)) {
 				ref var root = ref builder.ConstructRoot<ColliderBlob>();
-				var colliders = builder.Allocate(ref root.Colliders, colliderList.Count + 2); // plane colliders are not in this list
+				var colliders = builder.Allocate(ref root.Colliders, colliderId);
 
 				playfieldCollider.Allocate(builder, ref colliders);
 				glassCollider.Allocate(builder, ref colliders);
@@ -53,6 +53,7 @@ namespace VisualPinball.Unity
 				root.PlayfieldColliderId = playfieldCollider.Id;
 				root.GlassColliderId = glassCollider.Id;
 
+				// copy generated colliders into blob array
 				foreach (var collider in colliderList) {
 					collider.Allocate(builder, ref colliders);
 				}

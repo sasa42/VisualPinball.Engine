@@ -23,7 +23,7 @@ using VisualPinball.Engine.Physics;
 
 namespace VisualPinball.Unity
 {
-	internal struct LineZCollider
+	internal struct LineZCollider : ICollider
 	{
 		private ColliderHeader _header;
 
@@ -33,11 +33,40 @@ namespace VisualPinball.Unity
 
 		public float XyY { set => _xy.y = value; }
 
-		public static void Create(BlobBuilder builder, HitLineZ src, ref BlobPtr<Collider> dest)
+		public Aabb Aabb => new Aabb {
+			Left = _xy.x,
+			Right = _xy.x,
+			Top = _xy.y,
+			Bottom = _xy.y,
+			ZLow = _zLow,
+			ZHigh = _zHigh,
+			ColliderEntity = _header.Entity,
+			ColliderId = _header.Id
+		};
+
+		public unsafe void Allocate(BlobBuilder builder, ref BlobBuilderArray<BlobPtr<Collider>> colliders)
 		{
-			ref var linePtr = ref UnsafeUtility.As<BlobPtr<Collider>, BlobPtr<LineZCollider>>(ref dest);
-			ref var collider = ref builder.Allocate(ref linePtr);
-			collider.Init(src);
+			ref var ptr = ref UnsafeUtility.As<BlobPtr<Collider>, BlobPtr<LineZCollider>>(ref colliders[_header.Id]);
+			ref var collider = ref builder.Allocate(ref ptr);
+			UnsafeUtility.MemCpy(
+				UnsafeUtility.AddressOf(ref collider),
+				UnsafeUtility.AddressOf(ref this),
+				sizeof(LineZCollider)
+			);
+		}
+
+		public LineZCollider(float2 xy, ColliderInfo info) : this()
+		{
+			_header.Init(info, ColliderType.LineZ);
+			_xy = xy;
+		}
+
+		public LineZCollider(float2 xy, float zLow, float zHigh, ColliderInfo info) : this()
+		{
+			_header.Init(info, ColliderType.LineZ);
+			_xy = xy;
+			_zLow = zLow;
+			_zHigh = zHigh;
 		}
 
 		public static LineZCollider Create(HitLineZ src)
