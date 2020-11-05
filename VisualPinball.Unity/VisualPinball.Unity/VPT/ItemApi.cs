@@ -30,7 +30,7 @@ namespace VisualPinball.Unity
 		internal readonly Entity Entity;
 		internal readonly Entity ParentEntity;
 
-		protected TData Data => Item.Data;
+		internal TData Data => Item.Data;
 		protected Table Table => _player.Table;
 
 		protected readonly EntityManager EntityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
