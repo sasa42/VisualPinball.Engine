@@ -19,7 +19,6 @@ using Unity.Collections.LowLevel.Unsafe;
 using Unity.Entities;
 using Unity.Mathematics;
 using VisualPinball.Engine.Game;
-using VisualPinball.Engine.Physics;
 
 namespace VisualPinball.Unity
 {
