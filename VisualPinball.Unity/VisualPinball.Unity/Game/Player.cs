@@ -204,6 +204,7 @@ namespace VisualPinball.Unity
 			var kickerApi = new KickerApi(kicker, entity, parentEntity, this);
 			_tableApi.Kickers[kicker.Name] = kickerApi;
 			_initializables.Add(kickerApi);
+			_colliderGenerators.Add(kickerApi);
 			_hittables[entity] = kickerApi;
 			_switches[kicker.Name] = kickerApi;
 			_coils[kicker.Name] = kickerApi;
@@ -213,6 +214,7 @@ namespace VisualPinball.Unity
 		{
 			var plungerApi = new PlungerApi(plunger, entity, parentEntity, this);
 			_tableApi.Plungers[plunger.Name] = plungerApi;
+			_colliderGenerators.Add(plungerApi);
 			_initializables.Add(plungerApi);
 			_rotatables[entity] = plungerApi;
 			_coils[plunger.Name] = plungerApi;

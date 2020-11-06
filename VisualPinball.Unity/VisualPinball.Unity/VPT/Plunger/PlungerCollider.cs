@@ -22,7 +22,7 @@ using VisualPinball.Engine.VPT.Plunger;
 
 namespace VisualPinball.Unity
 {
-	internal struct PlungerCollider
+	internal struct PlungerCollider : ICollider
 	{
 		private ColliderHeader _header;
 
@@ -30,7 +30,44 @@ namespace VisualPinball.Unity
 		private LineZCollider _jointBase0;
 		private LineZCollider _jointBase1;
 
-		public ColliderType Type => ColliderType.Plunger;
+		public Aabb Aabb;
+
+		public PlungerCollider(PlungerData data, float zHeight, ColliderInfo info) : this()
+		{
+			_header.Init(info, ColliderType.Plunger);
+
+			var x = data.Center.X - data.Width;
+			var y = data.Center.Y + data.Height;
+			var x2 = data.Center.X + data.Width;
+
+			// static
+			_lineSegBase = new LineCollider(new float2(x, y), new float2(x2, y), zHeight, zHeight + Plunger.PlungerHeight, info);
+			_jointBase0 = new LineZCollider(new float2(x, y), zHeight, zHeight + Plunger.PlungerHeight, info);
+			_jointBase1 = new LineZCollider(new float2(x2, y), zHeight, zHeight + Plunger.PlungerHeight, info);
+
+			var frameEnd = data.Center.Y - data.Stroke;
+			Aabb = new Aabb {
+				Left = x - 0.1f,
+				Right = x2 + 0.1f,
+				Top = frameEnd - 0.1f,
+				Bottom = y + 0.1f,
+				ZLow = zHeight,
+				ZHigh = zHeight + Plunger.PlungerHeight,
+				ColliderEntity = _header.Entity,
+				ColliderId = _header.Id
+			};
+		}
+
+		public unsafe void Allocate(BlobBuilder builder, ref BlobBuilderArray<BlobPtr<Collider>> colliders)
+		{
+			ref var ptr = ref UnsafeUtility.As<BlobPtr<Collider>, BlobPtr<PlungerCollider>>(ref colliders[_header.Id]);
+			ref var collider = ref builder.Allocate(ref ptr);
+			UnsafeUtility.MemCpy(
+				UnsafeUtility.AddressOf(ref collider),
+				UnsafeUtility.AddressOf(ref this),
+				sizeof(PlungerCollider)
+			);
+		}
 
 		public static void Create(BlobBuilder builder, PlungerHit src, ref BlobPtr<Collider> dest)
 		{
