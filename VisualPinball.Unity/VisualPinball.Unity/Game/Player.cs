@@ -234,6 +234,7 @@ namespace VisualPinball.Unity
 			var rampApi = new RampApi(ramp, entity, parentEntity, this);
 			_tableApi.Ramps[ramp.Name] = rampApi;
 			_initializables.Add(rampApi);
+			_colliderGenerators.Add(rampApi);
 		}
 
 		public void RegisterRubber(Rubber rubber, Entity entity, Entity parentEntity, GameObject go)
