@@ -260,6 +260,7 @@ namespace VisualPinball.Unity
 			var spinnerApi = new SpinnerApi(spinner, entity, parentEntity, this);
 			_tableApi.Spinners[spinner.Name] = spinnerApi;
 			_initializables.Add(spinnerApi);
+			_colliderGenerators.Add(spinnerApi);
 			_spinnables[entity] = spinnerApi;
 			_rotatables[entity] = spinnerApi;
 			_switches[spinner.Name] = spinnerApi;
