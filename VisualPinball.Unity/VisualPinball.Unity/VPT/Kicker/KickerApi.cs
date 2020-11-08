@@ -184,6 +184,9 @@ namespace VisualPinball.Unity
 				height + Data.HitHeight, GetNextColliderInfo(table, ref nextColliderId), ColliderType.KickerCircle));
 		}
 
+		ColliderInfo IColliderGenerator.GetNextColliderInfo(Table table, ref int nextColliderId) =>
+			GetNextColliderInfo(table, ref nextColliderId);
+
 		#endregion
 
 		#region Events

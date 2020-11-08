@@ -111,38 +111,7 @@ namespace VisualPinball.Unity
 			}
 		}
 
-		#region Events
-
-		void IApiInitializable.OnInit(BallManager ballManager)
-		{
-			Init?.Invoke(this, EventArgs.Empty);
-		}
-
-		void IApiHittable.OnHit(bool _)
-		{
-			Hit?.Invoke(this, EventArgs.Empty);
-		}
-
-		void IApiRotatable.OnRotate(float speed, bool direction)
-		{
-			if (direction) {
-				_isEos = true;
-				OnSwitch(true);
-				LimitEos?.Invoke(this, new RotationEventArgs { AngleSpeed = speed });
-
-			} else {
-				LimitBos?.Invoke(this, new RotationEventArgs { AngleSpeed = speed });
-			}
-		}
-
-		void IApiCollidable.OnCollide(float hit)
-		{
-			Collide?.Invoke(this, new CollideEventArgs { FlipperHit = hit });
-		}
-
-		#endregion
-
-		#region Collider Generator
+		#region Collider Generation
 
 		internal override PhysicsMaterialData GetPhysicsMaterial(Table table) => new PhysicsMaterialData {
 			ElasticityFalloff = Data.OverridePhysics != 0 || table.Data.OverridePhysicsFlipper && table.Data.OverridePhysics != 0
@@ -174,6 +143,40 @@ namespace VisualPinball.Unity
 			);
 
 			colliders.Add(new FlipperCollider(hitCircleBase, GetNextColliderInfo(table, ref nextColliderId)));
+		}
+
+		ColliderInfo IColliderGenerator.GetNextColliderInfo(Table table, ref int nextColliderId) =>
+			GetNextColliderInfo(table, ref nextColliderId);
+
+		#endregion
+
+		#region Events
+
+		void IApiInitializable.OnInit(BallManager ballManager)
+		{
+			Init?.Invoke(this, EventArgs.Empty);
+		}
+
+		void IApiHittable.OnHit(bool _)
+		{
+			Hit?.Invoke(this, EventArgs.Empty);
+		}
+
+		void IApiRotatable.OnRotate(float speed, bool direction)
+		{
+			if (direction) {
+				_isEos = true;
+				OnSwitch(true);
+				LimitEos?.Invoke(this, new RotationEventArgs { AngleSpeed = speed });
+
+			} else {
+				LimitBos?.Invoke(this, new RotationEventArgs { AngleSpeed = speed });
+			}
+		}
+
+		void IApiCollidable.OnCollide(float hit)
+		{
+			Collide?.Invoke(this, new CollideEventArgs { FlipperHit = hit });
 		}
 
 		#endregion

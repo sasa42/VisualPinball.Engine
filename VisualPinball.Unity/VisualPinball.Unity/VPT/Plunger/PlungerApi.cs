@@ -102,6 +102,19 @@ namespace VisualPinball.Unity
 			}
 		}
 
+		#region Collider Generation
+
+		void IColliderGenerator.CreateColliders(Table table, List<ICollider> colliders, ref int nextColliderId)
+		{
+			var zHeight = table.GetSurfaceHeight(Data.Surface, Data.Center.X, Data.Center.Y);
+			colliders.Add(new PlungerCollider(Data, zHeight, GetNextColliderInfo(table, ref nextColliderId)));
+		}
+
+		ColliderInfo IColliderGenerator.GetNextColliderInfo(Table table, ref int nextColliderId) =>
+			GetNextColliderInfo(table, ref nextColliderId);
+
+		#endregion
+
 		#region Events
 
 		void IApiInitializable.OnInit(BallManager ballManager)
@@ -116,17 +129,6 @@ namespace VisualPinball.Unity
 			} else {
 				LimitBos?.Invoke(this, new StrokeEventArgs { Speed = speed });
 			}
-		}
-
-		#endregion
-
-		#region Collider Generation
-
-
-		void IColliderGenerator.CreateColliders(Table table, List<ICollider> colliders, ref int nextColliderId)
-		{
-			var zHeight = table.GetSurfaceHeight(Data.Surface, Data.Center.X, Data.Center.Y);
-			colliders.Add(new PlungerCollider(Data, zHeight, GetNextColliderInfo(table, ref nextColliderId)));
 		}
 
 		#endregion

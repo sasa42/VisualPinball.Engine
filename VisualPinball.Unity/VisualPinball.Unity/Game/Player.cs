@@ -251,6 +251,7 @@ namespace VisualPinball.Unity
 			var surfaceApi = new SurfaceApi(surface, entity, parentEntity, this);
 			_tableApi.Surfaces[surface.Name] = surfaceApi;
 			_initializables.Add(surfaceApi);
+			_colliderGenerators.Add(surfaceApi);
 			_hittables[entity] = surfaceApi;
 			_slingshots[entity] = surfaceApi;
 		}

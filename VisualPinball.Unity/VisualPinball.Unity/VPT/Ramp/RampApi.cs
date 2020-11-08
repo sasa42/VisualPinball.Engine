@@ -32,15 +32,6 @@ namespace VisualPinball.Unity
 		{
 		}
 
-		#region Events
-
-		void IApiInitializable.OnInit(BallManager ballManager)
-		{
-			Init?.Invoke(this, EventArgs.Empty);
-		}
-
-		#endregion
-
 		#region Collider Generation
 
 		internal override bool FireHitEvents => Data.HitEvent;
@@ -50,6 +41,18 @@ namespace VisualPinball.Unity
 		{
 			var colliderGenerator = new RampColliderGenerator(this);
 			colliderGenerator.GenerateColliders(table, colliders, ref nextColliderId);
+		}
+
+		ColliderInfo IColliderGenerator.GetNextColliderInfo(Table table, ref int nextColliderId) =>
+			GetNextColliderInfo(table, ref nextColliderId);
+
+		#endregion
+
+		#region Events
+
+		void IApiInitializable.OnInit(BallManager ballManager)
+		{
+			Init?.Invoke(this, EventArgs.Empty);
 		}
 
 		#endregion

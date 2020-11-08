@@ -82,6 +82,22 @@ namespace VisualPinball.Unity
 
 		void IApiSwitch.AddSwitchId(string switchId, int pulseDelay) => AddSwitchId(switchId, Item.IsPulseSwitch, pulseDelay);
 
+		#region Collider Generation
+
+		internal override bool FireHitEvents => Data.UseHitEvent;
+		internal override float HitThreshold => Data.Threshold;
+
+		void IColliderGenerator.CreateColliders(Table table, List<ICollider> colliders, ref int nextColliderId)
+		{
+			var colliderGenerator = new HitTargetColliderGenerator(this);
+			colliderGenerator.GenerateColliders(table, colliders, ref nextColliderId);
+		}
+
+		ColliderInfo IColliderGenerator.GetNextColliderInfo(Table table, ref int nextColliderId) =>
+			GetNextColliderInfo(table, ref nextColliderId);
+
+		#endregion
+
 		#region Events
 
 		void IApiInitializable.OnInit(BallManager ballManager)
@@ -93,19 +109,6 @@ namespace VisualPinball.Unity
 		{
 			Hit?.Invoke(this, EventArgs.Empty);
 			OnSwitch(true);
-		}
-
-		#endregion
-
-		#region Colliders
-
-		internal override bool FireHitEvents => Data.UseHitEvent;
-		internal override float HitThreshold => Data.Threshold;
-
-		void IColliderGenerator.CreateColliders(Table table, List<ICollider> colliders, ref int nextColliderId)
-		{
-			var colliderGenerator = new HitTargetColliderGenerator(this);
-			colliderGenerator.GenerateColliders(table, colliders, ref nextColliderId);
 		}
 
 		#endregion
