@@ -374,7 +374,6 @@ namespace VisualPinball.Unity
 							var deviceSwitch = device.Switch(switchData.DeviceItem);
 							if (deviceSwitch != null) {
 								deviceSwitch.AddSwitchId(switchData.Id, 0);
-								Debug.Log($"Adding switch {switchData.Id} to device {switchData.Device} ({switchData.DeviceItem})");
 
 							} else {
 								Logger.Warn($"Unknown switch \"{switchData.DeviceItem}\" in switch device \"{switchData.Device}\".");
