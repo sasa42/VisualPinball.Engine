@@ -42,9 +42,16 @@ namespace VisualPinball.Unity
 			return Shader.Find("Standard");
 		}
 
+		private Shader GetShader(PbrMaterial vpxMaterial)
+		{
+			return vpxMaterial.VertexLerpWithUvEnabled
+				? Shader.Find("Visual Pinball/Built-In/LerpVertex")
+				: GetShader();
+		}
+
 		public UnityEngine.Material CreateMaterial(PbrMaterial vpxMaterial, TableAuthoring table, StringBuilder debug = null)
 		{
-			var unityMaterial = new UnityEngine.Material(GetShader())
+			var unityMaterial = new UnityEngine.Material(GetShader(vpxMaterial))
 			{
 				name = vpxMaterial.Id
 			};
