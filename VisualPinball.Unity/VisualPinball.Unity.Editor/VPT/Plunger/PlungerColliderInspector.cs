@@ -17,7 +17,6 @@
 // ReSharper disable AssignmentInConditionalExpression
 
 using UnityEditor;
-using VisualPinball.Engine.VPT.Kicker;
 using VisualPinball.Engine.VPT.Plunger;
 
 namespace VisualPinball.Unity.Editor
@@ -40,8 +39,6 @@ namespace VisualPinball.Unity.Editor
 			ItemDataField("Visible", ref Data.IsVisible);
 			ItemDataField("Mech Strength", ref Data.MechStrength, false);
 			ItemDataField("Momentum Xfer", ref Data.MomentumXfer, false);
-			ItemDataField("Park Position (0..1)", ref Data.ParkPosition, false);
-
 			base.OnInspectorGUI();
 		}
 	}

@@ -17,6 +17,7 @@
 // ReSharper disable AssignmentInConditionalExpression
 
 using UnityEditor;
+using UnityEngine;
 using VisualPinball.Engine.VPT;
 using VisualPinball.Engine.VPT.Plunger;
 
@@ -40,18 +41,23 @@ namespace VisualPinball.Unity.Editor
 
 			ItemDataField("Position", ref Data.Center);
 			SurfaceField("Surface", ref Data.Surface);
+			DropDownField("Type", ref Data.Type, PlungerTypeLabels, PlungerTypeValues, onChanged: ItemAuthoring.OnTypeChanged);
 
 			OnPreInspectorGUI();
 
 			if (_foldoutColorsAndFormatting = EditorGUILayout.BeginFoldoutHeaderGroup(_foldoutColorsAndFormatting, "Colors & Formatting")) {
-				DropDownField("Type", ref Data.Type, PlungerTypeLabels, PlungerTypeValues, onChanged: ItemAuthoring.OnTypeChanged);
 				MaterialField("Material", ref Data.Material);
 				TextureField("Image", ref Data.Image);
 				ItemDataField("Flat Frames", ref Data.AnimFrames);
 				ItemDataField("Width", ref Data.Width);
 				ItemDataField("Z Adjustment", ref Data.ZAdjust);
+				ItemDataSlider("Park Position (0..1)", ref Data.ParkPosition, 0, 1, false, (before, after) => {
+					ItemAuthoring.UpdateParkPosition(1 - after);
+				});
+
 				EditorGUILayout.LabelField("Custom Settings");
 				EditorGUI.indentLevel++;
+				EditorGUI.BeginDisabledGroup(Data.Type != PlungerType.PlungerTypeCustom);
 				ItemDataField("Rod Diameter", ref Data.RodDiam);
 				ItemDataField("Tip Shape", ref Data.TipShape); // TODO: break this down and provide individual fields
 				ItemDataField("Ring Gap", ref Data.RingGap);
@@ -62,6 +68,7 @@ namespace VisualPinball.Unity.Editor
 				ItemDataField("Spring Loops", ref Data.SpringLoops);
 				ItemDataField("End Loops", ref Data.SpringEndLoops);
 				EditorGUI.indentLevel--;
+				EditorGUI.EndDisabledGroup();
 			}
 			EditorGUILayout.EndFoldoutHeaderGroup();
 
@@ -74,7 +81,6 @@ namespace VisualPinball.Unity.Editor
 				ItemDataField("Auto Plunger", ref Data.AutoPlunger, false);
 				ItemDataField("Mech Strength", ref Data.MechStrength, false);
 				ItemDataField("Momentum Xfer", ref Data.MomentumXfer, false);
-				ItemDataField("Park Position (0..1)", ref Data.ParkPosition, false);
 			}
 			EditorGUILayout.EndFoldoutHeaderGroup();
 
