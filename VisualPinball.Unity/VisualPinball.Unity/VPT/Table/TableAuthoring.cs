@@ -23,7 +23,6 @@ using System.Linq;
 using NLog;
 using UnityEngine;
 using VisualPinball.Engine.Common;
-using VisualPinball.Engine.Game;
 using VisualPinball.Engine.VPT;
 using VisualPinball.Engine.VPT.Bumper;
 using VisualPinball.Engine.VPT.Collection;
