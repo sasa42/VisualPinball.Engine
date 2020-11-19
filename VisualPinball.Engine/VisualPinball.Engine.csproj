@@ -27,6 +27,7 @@
   <ItemGroup>
     <PackageReference Include="NLog" Version="4.7.4" />
     <PackageReference Include="OpenMcdf" Version="2.2.1.6" />
+    <PackageReference Include="WPCEmuCS" Version="0.0.5" />
     <PackageReference Include="NetMiniZ" Version="1.1.2" />
     <PackageReference Include="NetVips" Version="1.2.4" />
     <PackageReference Include="NetVips.Native" Version="8.10.0" />
@@ -64,6 +65,7 @@
     <ItemGroup>
       <Plugins Include="$(OutDir)NLog.dll" />
       <Plugins Include="$(OutDir)OpenMcdf.dll" />
+      <Plugins Include="$(OutDir)WPCEmuCS.dll" />
 
       <NativePlugins Include="$(OutDir)NetMiniZ.dll" />
       <NativePlugins Include="$(OutDir)NetVips.dll" />
