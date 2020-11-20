@@ -1,0 +1,759 @@
+{
+  "sitemap": {
+    "baseUrl": "https://docs.visualpinball.org/",
+    "changefreq": "weekly",
+    "priority": 0.5
+  },
+  "homepages": [],
+  "source_base_path": "/github/workspace/VisualPinball.Unity/Documentation~",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      },
+      "is_incremental": false
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "CNAME",
+      "output": {
+        "resource": {
+          "relative_path": "CNAME"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "android-chrome-192x192.png",
+      "output": {
+        "resource": {
+          "relative_path": "android-chrome-192x192.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "android-chrome-256x256.png",
+      "output": {
+        "resource": {
+          "relative_path": "android-chrome-256x256.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VisualPinball.Unity.FlipperApi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VisualPinball.Unity.FlipperApi.html",
+          "hash": "RtNcS9dxknIWf9ia3qiK9w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VisualPinball.Unity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VisualPinball.Unity.html",
+          "hash": "ZFv5K8qgQ7s3BkeisVUqNg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "RxMxLv+jBsK8ZERT9N+7UA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "HjXU/PW7rfTromJO1nmi0g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "apple-touch-icon.png",
+      "output": {
+        "resource": {
+          "relative_path": "apple-touch-icon.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "creators-guide/editor/coil-manager.md",
+      "output": {
+        ".html": {
+          "relative_path": "creators-guide/editor/coil-manager.html",
+          "hash": "O5Mnb/NztYXhbU9GfuKnTw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/editor/coil-manager.png",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/editor/coil-manager.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/editor/dual-wound-coils.png",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/editor/dual-wound-coils.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/editor/multiple-tables-lock.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/editor/multiple-tables-lock.jpg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "creators-guide/editor/multiple-tables.md",
+      "output": {
+        ".html": {
+          "relative_path": "creators-guide/editor/multiple-tables.html",
+          "hash": "wc3R2VexXJuDTifSCMsB6g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/editor/properties-vpe-vs-vp.png",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/editor/properties-vpe-vs-vp.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/editor/switch-manager-dual-wound.png",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/editor/switch-manager-dual-wound.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "creators-guide/editor/switch-manager.md",
+      "output": {
+        ".html": {
+          "relative_path": "creators-guide/editor/switch-manager.html",
+          "hash": "KpCqJtYku2p2vcewu6OoNA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/editor/switch-manager.png",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/editor/switch-manager.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "creators-guide/editor/unity-components.md",
+      "output": {
+        ".html": {
+          "relative_path": "creators-guide/editor/unity-components.html",
+          "hash": "3dp8FGaNc1/+uYfGTsCvhw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "creators-guide/editor/wire-manager.md",
+      "output": {
+        ".html": {
+          "relative_path": "creators-guide/editor/wire-manager.html",
+          "hash": "l79hqfQ+dSpHGkG5R1Ajdg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/editor/wire-manager.png",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/editor/wire-manager.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/introduction/comparison-vpx-vpe.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/introduction/comparison-vpx-vpe.jpg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "creators-guide/introduction/features.md",
+      "output": {
+        ".html": {
+          "relative_path": "creators-guide/introduction/features.html",
+          "hash": "/dYs0G49dddunwJXGqt63A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/introduction/jp-header.png",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/introduction/jp-header.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/introduction/mesh-example.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/introduction/mesh-example.jpg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "creators-guide/introduction/overview.md",
+      "output": {
+        ".html": {
+          "relative_path": "creators-guide/introduction/overview.html",
+          "hash": "6KWwtoKspgWzlqGh+XtJGA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/introduction/unity-colliders.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/introduction/unity-colliders.jpg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/introduction/unity-drag-points.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/introduction/unity-drag-points.jpg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/introduction/unity-editor.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/introduction/unity-editor.jpg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "creators-guide/manual/gamelogic-engine.md",
+      "output": {
+        ".html": {
+          "relative_path": "creators-guide/manual/gamelogic-engine.html",
+          "hash": "nbaXu4JKzmj7ZzHTI0Tsjg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "creators-guide/manual/manual.md",
+      "output": {
+        ".html": {
+          "relative_path": "creators-guide/manual/manual.html",
+          "hash": "REltLX0+SS5aoqJqHRBiXA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "creators-guide/manual/mechanisms/flippers.md",
+      "output": {
+        ".html": {
+          "relative_path": "creators-guide/manual/mechanisms/flippers.html",
+          "hash": "SUhSrV6n3VfMWwpcnIUZUw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/manual/mechanisms/trough-coils.png",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/manual/mechanisms/trough-coils.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/manual/mechanisms/trough-inspector.png",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/manual/mechanisms/trough-inspector.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/manual/mechanisms/trough-switches.png",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/manual/mechanisms/trough-switches.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "creators-guide/manual/mechanisms/troughs.md",
+      "output": {
+        ".html": {
+          "relative_path": "creators-guide/manual/mechanisms/troughs.html",
+          "hash": "IqQ77jvL8RRi2yxRBskc5Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/setup/explorer-vpe-root.png",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/setup/explorer-vpe-root.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "creators-guide/setup/installing-vpe.md",
+      "output": {
+        ".html": {
+          "relative_path": "creators-guide/setup/installing-vpe.html",
+          "hash": "cuUPxaa2IOUZmvuQjkF6NA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "creators-guide/setup/running-vpe.md",
+      "output": {
+        ".html": {
+          "relative_path": "creators-guide/setup/running-vpe.html",
+          "hash": "FdoFBU6jinivJg1e05rB+w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/setup/unity-create-new-project.png",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/setup/unity-create-new-project.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/setup/unity-hdrp-default-scene.png",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/setup/unity-hdrp-default-scene.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/setup/unity-hdrp-to-delete-assets.png",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/setup/unity-hdrp-to-delete-assets.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/setup/unity-hdrp-to-delete.png",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/setup/unity-hdrp-to-delete.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/setup/unity-imported-table-aligned.png",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/setup/unity-imported-table-aligned.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/setup/unity-imported-table.png",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/setup/unity-imported-table.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/setup/unity-input-system-warning.png",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/setup/unity-input-system-warning.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "creators-guide/setup/unity-package-manager.png",
+      "output": {
+        "resource": {
+          "relative_path": "creators-guide/setup/unity-package-manager.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "creators-guide/setup/updating-vpe.md",
+      "output": {
+        ".html": {
+          "relative_path": "creators-guide/setup/updating-vpe.html",
+          "hash": "VCn5aQX5DI1SPC+mxhLS4g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "creators-guide/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "creators-guide/toc.html",
+          "hash": "stI7hIolNSibLs5titxZNg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "creators-guide/vpe.md",
+      "output": {
+        ".html": {
+          "relative_path": "creators-guide/vpe.html",
+          "hash": "9vAlmlgSsCPb36YpuKnyZg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "favicon-16x16.png",
+      "output": {
+        "resource": {
+          "relative_path": "favicon-16x16.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "favicon-32x32.png",
+      "output": {
+        "resource": {
+          "relative_path": "favicon-32x32.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "favicon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "favicon.ico"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "favicon.png",
+      "output": {
+        "resource": {
+          "relative_path": "favicon.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/social-poster.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "images/social-poster.jpg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "tDelHwYamxrzyIY9DqrGyA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "safari-pinned-tab.svg",
+      "output": {
+        "resource": {
+          "relative_path": "safari-pinned-tab.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "site.webmanifest",
+      "output": {
+        "resource": {
+          "relative_path": "site.webmanifest"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "template/vpe/logo.svg",
+      "output": {
+        "resource": {
+          "relative_path": "template/vpe/logo.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "OUnzNLWJQvjvutpfJj9l0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "vpe.svg",
+      "output": {
+        "resource": {
+          "relative_path": "vpe.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 17,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 2,
+          "skipped_file_count": 0
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
