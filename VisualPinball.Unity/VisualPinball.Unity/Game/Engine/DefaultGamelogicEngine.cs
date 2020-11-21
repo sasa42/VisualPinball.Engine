@@ -29,7 +29,7 @@ namespace VisualPinball.Unity
 	/// them up to the switches.
 	/// </summary>
 	[Serializable]
-	public class DefaultGamelogicEngine : IGamelogicEngine, IGamelogicEngineWithSwitches, IGamelogicEngineWithCoils
+	public class DefaultGamelogicEngine : IGamelogicEngine, IGamelogicEngineWithSwitches, IGamelogicEngineWithCoils, IGamelogicEngineWithLamps
 	{
 		public string Name { get; } = "Default Game Engine";
 
@@ -79,6 +79,11 @@ namespace VisualPinball.Unity
 			new GamelogicEngineCoil { Id = CoilTroughEject, Description = "Trough Eject", DeviceHint = "^Trough\\s*\\d?", DeviceItemHint = "eject"}
 		};
 
+		public GamelogicEngineLamp[] AvailableLamps { get; } =
+		{
+			new GamelogicEngineLamp { Id = "l_11", Description = "Matrix Lamp 11" }
+		};
+
 		private TableApi _tableApi;
 		private BallManager _ballManager;
 
@@ -113,6 +118,8 @@ namespace VisualPinball.Unity
 		}
 
 		public event EventHandler<CoilEventArgs> OnCoilChanged;
+
+		public event EventHandler<LampEventArgs> OnLampChanged;
 
 		public void Switch(string id, bool normallyClosed)
 		{
